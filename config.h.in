@@ -1,0 +1,9 @@
+#ifndef CONFIG_H_IN
+#define CONFIG_H_IN
+
+#define GUNFLOW_VERSION_MAJOR @GUNFLOW_VERSION_MAJOR@
+#define GUNFLOW_VERSION_MINOR @GUNFLOW_VERSION_MINOR@
+
+static const int MAX_DIM = 4;
+
+#endif
