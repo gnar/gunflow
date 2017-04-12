@@ -1,13 +1,15 @@
 #include "shape.h"
 
-#include <iostream>
+#include <sstream>
 
-void Shape::describe(std::ostream &out) const {
-  out << "(";
+std::string Shape::describe() const {
+  std::stringstream ss;
+  ss << "(";
   for (int d = 0; d < ndim; ++d) {
-    if (d > 0) out << ", ";
-    out << vec[d];
+    if (d > 0) ss << ", ";
+    ss << vec[d];
   }
-  out << ")";
+  ss << ")";
+  return ss.str();
 }
 

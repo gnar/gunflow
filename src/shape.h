@@ -2,11 +2,12 @@
 #define NDIM_H
 
 #include <iosfwd>
+#include <numeric>
+#include <string>
 
 #include "util.h"
 #include "config.h"
 
-#include <numeric>
 
 class Shape
 {
@@ -30,11 +31,11 @@ public:
     : Shape(strides.begin(), strides.end()) {
   }
 
-  void describe(std::ostream &out) const;
+  std::string describe() const;
 };
 
-inline std::ostream& operator<<(std::ostream& out, const Shape& d) {
-  d.describe(out);
+inline std::ostream& operator<<(std::ostream& out, const Shape& shape) {
+  out << shape.describe();
   return out;
 }
 

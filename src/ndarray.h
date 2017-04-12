@@ -1,64 +1,75 @@
 #ifndef NDARRAY_H
 #define NDARRAY_H
 
-#include "view.h"
+#include "shape.h"
+#include "strides.h"
 #include "buffer.h"
+//#include "slices.h"
+#include "dtype.h"
+
 #include "util.h"
 
 #include <stdexcept>
 #include <iosfwd>
 #include <memory>
 
+#include <iostream>
+using namespace std;
+
 class NDArray
 {
-  const View view;
+public:
+  const int offset;
+  const Shape shape;
+  const Strides strides;
+  const DType dtype;
   const std::shared_ptr<Buffer> buffer;
 
-public:
-  NDArray(Shape shape) : _shape(shape), _storage(new Storage(_shape.nelem())) {
-    check(_shape.is_compact(), "shape must be compact");
+  NDArray(const Shape &shape) 
+    : offset(0)
+    , shape(shape)
+    , strides(Strides::column_major(shape, sizeof(float)))
+    , dtype(f32) 
+    , buffer(std::make_shared<Buffer>(shape.nelem * sizeof(float))) {
   }
 
-  NDArray(Shape shape, Storage *storage) : _shape(shape), _storage(storage) {
+  auto nrows() const { return shape.vec[0]; }
+  auto ncols() const { return shape.vec[1]; }
+
+  template <typename T>
+  auto &index(const int linidx) const {
+    return buffer->index<T>(offset + linidx);
   }
 
-  auto ndim() const { return _shape.ndim(); }
-  auto nelem() const { return _shape.nelem(); }
-  auto nrows() const { return _shape.sizes()[0]; }
-  auto ncols() const { return _shape.sizes()[1]; }
-
-  auto &shape() const { return _shape; }
-  auto &storage() const { return _storage; }
-
-  auto &operator[](int linidx) const {
-    return _storage->data()[linidx];
-  }
-
+  template <typename T>
   auto &at(int i) const {
-    return (*this)[_shape.linidx(i)];
+    return index<T>(offset + strides.linidx(i));
   }
 
+  template <typename T>
   auto &at(int i, int j) const {
-    return (*this)[_shape.linidx(i, j)];
+    return index<T>(offset + strides.linidx(i, j));
   }
 
+  template <typename T>
   auto &at(int i, int j, int k) const {
-    return (*this)[_shape.linidx(i, j, k)];
+    cout << offset + strides.linidx(i, j, k) << endl;
+    return index<T>(offset + strides.linidx(i, j, k));
   }
 
-  template <typename UnaryOp>
+  /*template <typename UnaryOp>
   void transform(UnaryOp op) {
     if (shape().is_compact()) {
       transform_compact(op);
     } else {
       check(false, "not supported");
     }
-  }
+  }*/
 
   void describe(std::ostream &out) const;
 
 private:
-  template <typename UnaryOp>
+  /*template <typename UnaryOp>
   void transform_compact(UnaryOp op) {
     const int ndim = shape().ndim();
 
@@ -70,7 +81,7 @@ private:
 
     float *beg = &storage()->data()[0];
     std::transform(beg, beg + end_idx, beg, op);
-  }
+  }*/
 };
 
 inline std::ostream& operator<<(std::ostream& out, const NDArray& a) {

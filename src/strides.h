@@ -2,6 +2,7 @@
 #define STRIDES_H
 
 #include <iosfwd>
+#include <string>
 
 #include "util.h"
 #include "config.h"
@@ -27,14 +28,31 @@ public:
     : Strides(strides.begin(), strides.end()) {
   }
 
-  void describe(std::ostream &out) const;
+  std::string describe() const;
 
-  static Strides column_major(const Shape &shape, int dtype_stride);
-  static Strides row_major(const Shape &shape, int dtype_stride);
+  static Strides column_major(const Shape &shape, int dtype_width);
+  static Strides row_major(const Shape &shape, int dtype_width);
+
+  template <typename Iter>
+  int linidx(Iter it, Iter end) const {
+    int idx = 0;
+    for (int i=0; it != end; ++it, ++i) {
+      idx += *it * vec[i];
+    }
+    return idx;
+  }
+
+  auto linidx(std::initializer_list<int> xs) const { return linidx(xs.begin(), xs.end()); }
+
+  auto linidx(int i) const { return linidx({i}); }
+  auto linidx(int i, int j) const { return linidx({i, j}); }
+  auto linidx(int i, int j, int k) const { return linidx({i, j, k}); }
+
+  bool is_compact() const { return true; }
 };
 
 inline std::ostream& operator<<(std::ostream& out, const Strides& d) {
-  d.describe(out);
+  out << d.describe();
   return out;
 }
 

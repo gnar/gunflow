@@ -1,8 +1,10 @@
 #include "buffer.h"
 
-#include <ostream>
+#include <sstream>
 
-void Buffer::describe(std::ostream &out) const {
-  out << "Buffer(" << size << ")";
+std::string Buffer::describe() const {
+  std::stringstream ss;
+  ss << "Buffer(" << size << ")";
+  return ss.str();
 }
 

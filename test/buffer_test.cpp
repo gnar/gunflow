@@ -15,13 +15,13 @@ TEST_F(BufferTest, data) {
 }
 
 TEST_F(BufferTest, at) {
-  buf0.at<float>(0) = 42.0;
-  ASSERT_EQ(42.0, buf0.at<float>(0));
+  buf0.index<float>(0) = 42.0;
+  ASSERT_EQ(42.0, buf0.index<float>(0));
 }
 
 TEST_F(BufferTest, copy) {
   for (int i=0; i<4096; ++i) {
-    buf0.at<char>(i) = i % 32;
+    buf0.index<char>(i) = i % 32;
   }
   
   auto buf1 = buf0;
@@ -29,6 +29,6 @@ TEST_F(BufferTest, copy) {
   ASSERT_NE(buf1.data, buf0.data);
   
   for (int i=0; i<4096; ++i) {
-    ASSERT_EQ(i % 32, buf0.at<char>(i));
+    ASSERT_EQ(i % 32, buf0.index<char>(i));
   }
 }

@@ -1,15 +1,17 @@
 #include "buffer.h"
 #include "shape.h"
 #include "strides.h"
+#include "ndarray.h"
 
 #include <iostream>
 using namespace std;
 
 int main(int argc, char *argv[]) {
 
-  cout << Shape{10, 100}.ndim << endl;
-  cout << Shape{10, 100}.nelem << endl;
+  NDArray a({10, 10, 4});
 
-  cout << Strides::column_major({10, 100}, 1) << endl;
+  a.at<char>(4, 3, 1) = 42;
+
+  cout << a << endl;
 }
 

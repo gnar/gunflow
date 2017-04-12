@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <iosfwd>
+#include <string>
 
 class Buffer {
 
@@ -27,16 +28,16 @@ public:
     }
   }
 
-  void describe(std::ostream &out) const;
+  std::string describe() const;
 
   template <typename T>
-  auto &at(const int linidx) {
+  auto &index(const int linidx) {
     return *(reinterpret_cast<T*>(data + linidx));
   }
 };
 
-inline std::ostream& operator<<(std::ostream& out, const Buffer& d) {
-  d.describe(out);
+inline std::ostream& operator<<(std::ostream& out, const Buffer& buf) {
+  out << buf.describe();
   return out;
 }
 

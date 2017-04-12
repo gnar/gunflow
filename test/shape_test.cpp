@@ -21,8 +21,6 @@ TEST_F(ShapeTest, has_correct_values_1) {
 }
 
 TEST_F(ShapeTest, describe) {
-  std::stringstream ss;
-  shape1.describe(ss);
-  ASSERT_EQ("(10, 20, 30)", ss.str());
+  ASSERT_EQ("(10, 20, 30)", shape1.describe());
 }
 
