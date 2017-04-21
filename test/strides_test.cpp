@@ -27,21 +27,21 @@ TEST_F(StridesTest, describe) {
 }
 
 TEST_F(StridesTest, row_major) {
-  const auto strides = Strides::row_major({10, 20, 30}, sizeof(float));
+  const auto strides = Strides::row_major({10, 20, 30});
 
   ASSERT_EQ(3, strides.ndim);
-  EXPECT_EQ(2400, strides.vec[0]);
-  EXPECT_EQ(120, strides.vec[1]);
-  EXPECT_EQ(4, strides.vec[2]);
+  EXPECT_EQ(600, strides.vec[0]);
+  EXPECT_EQ(30, strides.vec[1]);
+  EXPECT_EQ(1, strides.vec[2]);
 }
 
 TEST_F(StridesTest, column_major) {
-  const auto strides = Strides::column_major({10, 20, 30}, sizeof(float));
+  const auto strides = Strides::column_major({10, 20, 30});
 
   ASSERT_EQ(3, strides.ndim);
-  EXPECT_EQ(4, strides.vec[0]);
-  EXPECT_EQ(40, strides.vec[1]);
-  EXPECT_EQ(800, strides.vec[2]);
+  EXPECT_EQ(1, strides.vec[0]);
+  EXPECT_EQ(10, strides.vec[1]);
+  EXPECT_EQ(200, strides.vec[2]);
 }
 
 TEST_F(StridesTest, linidx_zero) {

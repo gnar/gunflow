@@ -14,10 +14,10 @@ std::string Strides::describe() const {
   return ss.str();
 }
 
-Strides Strides::column_major(const Shape &shape, int dtype_width) {
+Strides Strides::column_major(const Shape &shape) {
   int strides_vec[MAX_DIM];
 
-  for (int d=0, tmp=dtype_width; d<shape.ndim; ++d) {
+  for (int d=0, tmp=1; d<shape.ndim; ++d) {
     strides_vec[d] = tmp;
     tmp *= shape.vec[d];
   }
@@ -25,10 +25,10 @@ Strides Strides::column_major(const Shape &shape, int dtype_width) {
   return Strides(strides_vec, strides_vec + shape.ndim);
 }
 
-Strides Strides::row_major(const Shape &shape, int dtype_width) {
+Strides Strides::row_major(const Shape &shape) {
   int strides_vec[MAX_DIM];
 
-  for (int d=shape.ndim-1, tmp=dtype_width; d>=0; --d) {
+  for (int d=shape.ndim-1, tmp=1; d>=0; --d) {
     strides_vec[d] = tmp;
     tmp *= shape.vec[d];
   }

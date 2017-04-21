@@ -32,7 +32,7 @@ public:
 
   template <typename T>
   auto &index(const int linidx) {
-    return *(reinterpret_cast<T*>(data + linidx));
+    return *(reinterpret_cast<T*>(data) + linidx);
   }
 };
 

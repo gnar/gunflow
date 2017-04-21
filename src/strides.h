@@ -30,8 +30,8 @@ public:
 
   std::string describe() const;
 
-  static Strides column_major(const Shape &shape, int dtype_width);
-  static Strides row_major(const Shape &shape, int dtype_width);
+  static Strides column_major(const Shape &shape);
+  static Strides row_major(const Shape &shape);
 
   template <typename Iter>
   int linidx(Iter it, Iter end) const {
@@ -49,6 +49,10 @@ public:
   auto linidx(int i, int j, int k) const { return linidx({i, j, k}); }
 
   bool is_compact() const { return true; }
+
+  bool operator==(const Strides &other) const {
+    return ndim == other.ndim && vec == other.vec;
+  }
 };
 
 inline std::ostream& operator<<(std::ostream& out, const Strides& d) {

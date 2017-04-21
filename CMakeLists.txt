@@ -13,7 +13,7 @@ configure_file (
   "${PROJECT_BINARY_DIR}/config.h"
 )
 
-file(GLOB MAIN_SOURCES "src/*.cpp")
+file(GLOB MAIN_SOURCES "src/*.cpp" "src/nn/*.cpp")
 file(GLOB TEST_SOURCES "test/*.cpp")
 
 set(CMAKE_CXX_FLAGS "-O -Wall")

@@ -31,6 +31,10 @@ public:
     : Shape(strides.begin(), strides.end()) {
   }
 
+  bool operator==(const Shape &other) const {
+    return ndim == other.ndim && nelem == other.nelem && vec == other.vec;
+  }
+
   std::string describe() const;
 };
 
