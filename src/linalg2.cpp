@@ -1,7 +1,20 @@
 #include "linalg2.h"
+#include "linalg1.h"
 
 #include <algorithm>
 #include <numeric>
+
+void identity(NDArray A) {
+  check(A.is_matrix(), "A must be a matrix!");
+  check(A.ncols() == A.nrows(), "A must be a square matrix!");
+
+  fill(A, 0.0);
+
+  const auto n = A.nrows();
+  for (int i=0; i<n; ++i) {
+    A.at<float>(i, i) = 1.0;
+  }
+}
 
 // Compute C <- A*B.
 //

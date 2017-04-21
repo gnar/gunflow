@@ -2,7 +2,10 @@
 #include "shape.h"
 #include "strides.h"
 #include "ndarray.h"
+
 #include "linalg1.h"
+#include "linalg2.h"
+#include "pprint.h"
 
 #include "nn/mlp.h"
 
@@ -11,13 +14,14 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-  NDArray a({10, 10, 4});
+  NDArray a({10, 20});
+  NDArray b({20, 10});
+  NDArray c({10, 10});
 
-  a.at<char>(4, 3, 1) = 42;
+  normal(a, 0.0, 1.0);
+  normal(b, 0.0, 1.0);
+  matmul(c, a, b);
 
-  cout << a << endl;
-
-  MultilayerPerceptron mlp(4, 1, {4, 8}, {Sigmoid, Sigmoid});
-
+  pprint(cout, c);
 }
 
