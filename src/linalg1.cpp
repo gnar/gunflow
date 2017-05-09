@@ -1,8 +1,8 @@
 #include "linalg1.h"
 
-#include <random>
 #include <algorithm>
 #include <numeric>
+#include <random>
 
 static std::mt19937_64 engine;
 
@@ -29,4 +29,3 @@ void normal(NDArray A, float mean, float stddev) {
   std::normal_distribution<float> dist(mean, stddev);
   apply<float>(A, [&](float &a) { a = dist(engine); });
 }
-

@@ -9,13 +9,7 @@ public:
   const Strides strides;
   const DType dtype = f32;
 
-  template <typename T>
-  T &data(const int linidx) {
-    
-  }
-  
-
+  template <typename T> T &data(const int linidx) {}
 };
 
 #endif
-

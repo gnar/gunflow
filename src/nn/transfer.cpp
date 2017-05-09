@@ -1,14 +1,14 @@
 #include "transfer.h"
 
-#include "util.h"
 #include "func/sigmoid.h"
+#include "util.h"
 
 double evaluate(TransferFunction fn, double x) {
   switch (fn) {
-    case None:
-      return 0;
-    case Sigmoid:
-      return sigmoid(x);
+  case None:
+    return 0;
+  case Sigmoid:
+    return sigmoid(x);
   }
 
   check(false, "not implemented");
@@ -17,13 +17,12 @@ double evaluate(TransferFunction fn, double x) {
 
 double evaluate_derivative(TransferFunction fn, double x) {
   switch (fn) {
-    case None:
-      return 0;
-    case Sigmoid:
-      return sigmoid_derivative(x);
+  case None:
+    return 0;
+  case Sigmoid:
+    return sigmoid_derivative(x);
   }
 
   check(false, "not implemented");
   return 0;
 }
-

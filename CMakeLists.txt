@@ -16,7 +16,7 @@ configure_file (
 file(GLOB MAIN_SOURCES "src/*.cpp" "src/nn/*.cpp")
 file(GLOB TEST_SOURCES "test/*.cpp")
 
-set(CMAKE_CXX_FLAGS "-O -Wall")
+set(CMAKE_CXX_FLAGS "-O3 -Wall -std=gnu++14")
  
 # so that we find config.h
 include_directories("${PROJECT_BINARY_DIR}")

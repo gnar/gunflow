@@ -8,4 +8,3 @@ void identity(NDArray A);
 void matmul(NDArray C, NDArray A, NDArray B);
 
 #endif
-

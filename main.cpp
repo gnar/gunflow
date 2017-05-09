@@ -1,7 +1,7 @@
 #include "buffer.h"
+#include "ndarray.h"
 #include "shape.h"
 #include "strides.h"
-#include "ndarray.h"
 
 #include "linalg1.h"
 #include "linalg2.h"
@@ -24,4 +24,3 @@ int main(int argc, char *argv[]) {
 
   pprint(cout, c);
 }
-

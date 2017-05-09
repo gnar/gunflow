@@ -10,4 +10,3 @@ std::string Slice::describe() const {
   }
   return ss.str();
 }
-

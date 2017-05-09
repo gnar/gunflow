@@ -1,8 +1,8 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <array>
 #include <algorithm>
+#include <array>
 #include <iterator>
 
 template <typename T, int N, typename Iter>
@@ -16,4 +16,3 @@ static std::array<T, N> make_array(Iter begin, Iter end, const T &fill_value) {
 void check(bool condition, std::string msg);
 
 #endif
-

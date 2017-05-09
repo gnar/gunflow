@@ -7,4 +7,3 @@ void check(bool condition, std::string msg) {
     throw std::runtime_error(msg);
   }
 }
-

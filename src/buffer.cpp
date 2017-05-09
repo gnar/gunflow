@@ -7,4 +7,3 @@ std::string Buffer::describe() const {
   ss << "Buffer(" << size << ")";
   return ss.str();
 }
-

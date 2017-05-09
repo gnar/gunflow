@@ -7,4 +7,3 @@ void NDArray::describe(std::ostream &out) const {
   out << "strides=" << strides.describe() << ", ";
   out << "buffer=" << buffer->describe() << ")";
 }
-

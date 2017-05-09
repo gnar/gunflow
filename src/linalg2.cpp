@@ -1,5 +1,5 @@
-#include "linalg2.h"
 #include "linalg1.h"
+#include "linalg2.h"
 
 #include <algorithm>
 #include <numeric>
@@ -11,7 +11,7 @@ void identity(NDArray A) {
   fill(A, 0.0);
 
   const auto n = A.nrows();
-  for (int i=0; i<n; ++i) {
+  for (int i = 0; i < n; ++i) {
     A.at<float>(i, i) = 1.0;
   }
 }
@@ -39,15 +39,14 @@ void matmul(NDArray C, NDArray A, NDArray B) {
   const auto n = A.nrows();
   const auto m = A.ncols();
   const auto p = C.ncols();
-  
-  for (int i=0; i<n; ++i) {
-    for (int k=0; k<p; ++k) {
+
+  for (int i = 0; i < n; ++i) {
+    for (int k = 0; k < p; ++k) {
       float sum = 0.0;
-      for (int j=0; j<m; ++j) {
+      for (int j = 0; j < m; ++j) {
         sum += A.at<float>(i, j) * B.at<float>(j, k);
       }
       C.at<float>(i, k) = sum;
     }
   }
 }
-
